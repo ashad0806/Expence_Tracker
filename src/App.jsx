@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "./Components/NavBar";
 import Balance from "./Components/Balance";
+import CategoryChart from "./Components/Category_Chart";
 import TransactionForm from "./Components/TransactionForm";
 import TransactionList from "./Components/TransactionList";
 import FilterBar from "./Components/FilterBar";
@@ -73,8 +74,13 @@ function App() {
           <TransactionForm onAddTransaction={handleAddTransaction} />
         )}
 
+        {activeView === "summary" && (
+          <MonthlySummary transactions={transactions} />
+        )}
+
         {activeView === "dashboard" && (
           <>
+            <CategoryChart transactions={transactions} />
             <FilterBar
               filterCategory={filterCategory}
               setFilterCategory={setFilterCategory}

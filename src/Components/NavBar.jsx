@@ -13,6 +13,12 @@ function Navbar({ activeView, setActiveView }) {
           Dashboard
         </button>
         <button
+          className={activeView === "summary" ? "active" : ""}
+          onClick={() => setActiveView("summary")}
+        >
+          Monthly Summary
+        </button>
+        <button
           className={activeView === "add" ? "active" : ""}
           onClick={() => setActiveView("add")}
         >
