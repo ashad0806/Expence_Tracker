@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Navbar from "./Components/NavBar";
-import Balance from "./components/Balance";
+import Balance from "./Components/Balance";
 import TransactionForm from "./Components/TransactionForm";
+import TransactionList from "./Components/TransactionList";
 import "./App.css";
 
 function App() {
@@ -16,6 +17,10 @@ function App() {
     setActiveView("dashboard");
   };
 
+  const handleDeleteTransaction = (id) => {
+    setTransactions(transactions.filter((t) => t.id !== id));
+  };
+
   return (
     <div className="app">
       <Navbar activeView={activeView} setActiveView={setActiveView} />
@@ -25,6 +30,13 @@ function App() {
 
         {activeView === "add" && (
           <TransactionForm onAddTransaction={handleAddTransaction} />
+        )}
+
+        {activeView === "dashboard" && (
+          <TransactionList
+            transactions={transactions}
+            onDelete={handleDeleteTransaction}
+          />
         )}
       </div>
     </div>
