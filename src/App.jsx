@@ -5,6 +5,7 @@ import CategoryChart from "./Components/Category_Chart";
 import TransactionForm from "./Components/TransactionForm";
 import TransactionList from "./Components/TransactionList";
 import FilterBar from "./Components/FilterBar";
+import MonthlySummary from "./Components/MonthlySummary";
 import "./App.css";
 
 const STORAGE_KEY = "wallex-transactions";
