@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import Navbar from "./Components/NavBar";
 import Balance from "./Components/Balance";
+import BudgetTracker from "./Components/BudgetTracker";
 import CategoryChart from "./Components/Category_Chart";
+import MonthlySummary from "./Components/MonthlySummary";
 import TransactionForm from "./Components/TransactionForm";
 import TransactionList from "./Components/TransactionList";
 import FilterBar from "./Components/FilterBar";
-import MonthlySummary from "./Components/MonthlySummary";
 import "./App.css";
 
 const STORAGE_KEY = "wallex-transactions";
@@ -81,6 +82,7 @@ function App() {
 
         {activeView === "dashboard" && (
           <>
+            <BudgetTracker transactions={transactions} />
             <CategoryChart transactions={transactions} />
             <FilterBar
               filterCategory={filterCategory}

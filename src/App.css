@@ -494,3 +494,81 @@ body {
   padding-top: 0.6rem;
   font-weight: 600;
 }
+
+/* Budget tracker */
+.budget-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1rem;
+}
+
+.budget-card h2 {
+  font-size: 1rem;
+  color: #111827;
+  margin-bottom: 0.75rem;
+}
+
+.budget-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.budget-form input {
+  flex: 1;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.budget-form input:focus {
+  border-color: #2563eb;
+}
+
+.budget-form button {
+  padding: 0.55rem 1rem;
+  background-color: #111827;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.budget-progress-track {
+  background-color: #f3f4f6;
+  border-radius: 6px;
+  height: 10px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.budget-progress-fill {
+  background-color: #2563eb;
+  height: 100%;
+  transition: width 0.2s ease;
+}
+
+.budget-progress-fill.over {
+  background-color: #dc2626;
+}
+
+.budget-status {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.budget-warning {
+  margin-top: 0.75rem;
+  background-color: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
