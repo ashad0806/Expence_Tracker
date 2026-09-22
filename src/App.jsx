@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./Components/NavBar";
 import Balance from "./Components/Balance";
 import TransactionForm from "./Components/TransactionForm";
@@ -6,14 +6,25 @@ import TransactionList from "./Components/TransactionList";
 import FilterBar from "./Components/FilterBar";
 import "./App.css";
 
+const STORAGE_KEY = "wallex-transactions";
+
+const defaultTransactions = [
+  { id: 1, description: "Salary", amount: 1000, category: "Work", date: "2026-09-01" },
+  { id: 2, description: "Groceries", amount: -50, category: "Personal", date: "2026-09-05" },
+];
+
 function App() {
   const [activeView, setActiveView] = useState("dashboard");
-  const [transactions, setTransactions] = useState([
-    { id: 1, description: "Salary", amount: 1000, category: "Work", date: "2026-09-01" },
-    { id: 2, description: "Groceries", amount: -50, category: "Personal", date: "2026-09-05" },
-  ]);
+  const [transactions, setTransactions] = useState(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? JSON.parse(saved) : defaultTransactions;
+  });
   const [filterCategory, setFilterCategory] = useState("All");
   const [sortBy, setSortBy] = useState("date-desc");
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(transactions));
+  }, [transactions]);
 
   const handleAddTransaction = (newTransaction) => {
     setTransactions([newTransaction, ...transactions]);
