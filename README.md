@@ -1,16 +1,63 @@
-# React + Vite
+# Wallex — Personal Expense Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Wallex is a responsive React application for tracking personal income and expenses. Users can log transactions, monitor a running balance, set a monthly budget, and visualize their spending habits — all without needing a backend, since data is saved locally in the browser.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Add transactions with description, amount, type (income/expense), and category
+- View a running balance (income − expenses) updated in real time
+- List all transactions with category and date, with a "View All / Show Less" toggle after the first 5
+- Delete individual transactions
+- Filter transactions by category and sort by date or amount
+- Set a monthly budget with a donut-chart progress indicator and an overspend warning banner
+- Visualize spending by category with a bar chart
+- View a monthly summary of income, expenses, and net total
+- Data persists across page refreshes using `localStorage`
+- Two-column dashboard layout on desktop that adapts to a single stacked column (with budget/chart shown above transactions) on mobile
+- In-app navigation between Dashboard, Monthly Summary, and Add Transaction views
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [React](https://react.dev/) (functional components + hooks: `useState`, `useEffect`)
+- [Vite](https://vitejs.dev/) — build tool and dev server
+- Plain CSS (no external UI library) with CSS Grid for the responsive layout
+- Inline SVG for the budget donut chart (no charting library)
+- Browser `localStorage` API for persistence
 
-## Expanding the Oxlint configuration
+## Setup Instructions
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+1. Clone the repository:
+   ```
+   git clone https://github.com/ashad0806/Expence_Tracker.git
+   cd Expence_Tracker
+   ```
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Run the development server:
+   ```
+   npm run dev
+   ```
+4. Open the URL shown in your terminal (usually `http://localhost:5173`).
+
+## Screenshots
+
+### Dashboard
+![Dashboard view](./src/assets/Dashboard.png)
+
+### Monthly Summary
+![Monthly summary view](./src/assets/Monthly_Summary.png)
+
+### Add Transaction
+![Add transaction form](./src/assets/Add_Transaction.png)
+
+## Known Limitations
+
+- Data is stored per-browser via `localStorage`, not synced across devices or accounts.
+- No user authentication — all transactions are local to the current browser.
+- The monthly budget applies to the current calendar month only; there's no historical budget-vs-actual view for past months.
+
+## License
+
+This project is licensed under the MIT License — see the [LICENSE](./LICENSE) file for details.
