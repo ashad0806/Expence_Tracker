@@ -81,20 +81,25 @@ function App() {
         )}
 
         {activeView === "dashboard" && (
-          <>
-            <BudgetTracker transactions={transactions} />
-            <CategoryChart transactions={transactions} />
-            <FilterBar
-              filterCategory={filterCategory}
-              setFilterCategory={setFilterCategory}
-              sortBy={sortBy}
-              setSortBy={setSortBy}
-            />
-            <TransactionList
-              transactions={getVisibleTransactions()}
-              onDelete={handleDeleteTransaction}
-            />
-          </>
+          <div className="dashboard-grid">
+            <div className="dashboard-left">
+              <FilterBar
+                filterCategory={filterCategory}
+                setFilterCategory={setFilterCategory}
+                sortBy={sortBy}
+                setSortBy={setSortBy}
+              />
+              <TransactionList
+                transactions={getVisibleTransactions()}
+                onDelete={handleDeleteTransaction}
+              />
+            </div>
+
+            <div className="dashboard-right">
+              <BudgetTracker transactions={transactions} />
+              <CategoryChart transactions={transactions} />
+            </div>
+          </div>
         )}
       </div>
     </div>

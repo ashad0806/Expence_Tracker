@@ -27,6 +27,12 @@ function BudgetTracker({ transactions }) {
     setBudget(Number(inputValue) || 0);
   };
 
+  // Donut chart math
+  const radius = 60;
+  const strokeWidth = 16;
+  const circumference = 2 * Math.PI * radius;
+  const dashOffset = circumference - (percentUsed / 100) * circumference;
+
   return (
     <div className="budget-card">
       <h2>Monthly Budget</h2>
@@ -45,12 +51,47 @@ function BudgetTracker({ transactions }) {
 
       {budget > 0 && (
         <>
-          <div className="budget-progress-track">
-            <div
-              className={`budget-progress-fill ${isOverBudget ? "over" : ""}`}
-              style={{ width: `${percentUsed}%` }}
-            ></div>
+          <div className="donut-wrapper">
+            <svg width="160" height="160" viewBox="0 0 160 160">
+              <circle
+                cx="80"
+                cy="80"
+                r={radius}
+                fill="none"
+                stroke="#f3f4f6"
+                strokeWidth={strokeWidth}
+              />
+              <circle
+                cx="80"
+                cy="80"
+                r={radius}
+                fill="none"
+                stroke={isOverBudget ? "#dc2626" : "#2563eb"}
+                strokeWidth={strokeWidth}
+                strokeDasharray={circumference}
+                strokeDashoffset={dashOffset}
+                strokeLinecap="round"
+                transform="rotate(-90 80 80)"
+              />
+              <text
+                x="80"
+                y="76"
+                textAnchor="middle"
+                className="donut-percent"
+              >
+                {percentUsed.toFixed(0)}%
+              </text>
+              <text
+                x="80"
+                y="96"
+                textAnchor="middle"
+                className="donut-label"
+              >
+                used
+              </text>
+            </svg>
           </div>
+
           <p className="budget-status">
             ${currentMonthExpense.toFixed(2)} of ${budget.toFixed(2)} spent this month
           </p>
