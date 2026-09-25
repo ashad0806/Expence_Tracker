@@ -10,6 +10,7 @@ import FilterBar from "./Components/FilterBar";
 import "./App.css";
 
 const STORAGE_KEY = "wallex-transactions";
+const THEME_KEY = "wallex-theme";
 
 const defaultTransactions = [
   { id: 1, description: "Salary", amount: 1000, category: "Work", date: "2026-09-01" },
@@ -24,10 +25,22 @@ function App() {
   });
   const [filterCategory, setFilterCategory] = useState("All");
   const [sortBy, setSortBy] = useState("date-desc");
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem(THEME_KEY) || "light";
+  });
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(transactions));
   }, [transactions]);
+
+  useEffect(() => {
+    document.body.classList.toggle("dark", theme === "dark");
+    localStorage.setItem(THEME_KEY, theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
 
   const handleAddTransaction = (newTransaction) => {
     setTransactions([newTransaction, ...transactions]);
@@ -67,7 +80,12 @@ function App() {
 
   return (
     <div className="app">
-      <Navbar activeView={activeView} setActiveView={setActiveView} />
+      <Navbar
+        activeView={activeView}
+        setActiveView={setActiveView}
+        theme={theme}
+        toggleTheme={toggleTheme}
+      />
 
       <div className="app-content">
         <Balance transactions={transactions} />

@@ -1,4 +1,4 @@
-function Navbar({ activeView, setActiveView }) {
+function Navbar({ activeView, setActiveView, theme, toggleTheme }) {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
@@ -23,6 +23,14 @@ function Navbar({ activeView, setActiveView }) {
           onClick={() => setActiveView("add")}
         >
           Add Transaction
+        </button>
+        <button
+          className="theme-toggle-btn"
+          onClick={toggleTheme}
+          aria-label="Toggle dark mode"
+          title={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+        >
+          {theme === "light" ? "🌙" : "☀️"}
         </button>
       </div>
     </nav>
