@@ -7,6 +7,7 @@ import MonthlySummary from "./Components/MonthlySummary";
 import TransactionForm from "./Components/TransactionForm";
 import TransactionList from "./Components/TransactionList";
 import FilterBar from "./Components/FilterBar";
+import "./Components/ConfirmModal.jsx";
 import "./App.css";
 
 const STORAGE_KEY = "wallex-transactions";

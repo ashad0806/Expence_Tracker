@@ -1,5 +1,14 @@
+import { useState } from "react";
+import ConfirmModal from "./ConfirmModal";
+
 function TransactionItem({ transaction, onDelete }) {
+  const [showConfirm, setShowConfirm] = useState(false);
   const isExpense = transaction.amount < 0;
+
+  const handleConfirmDelete = () => {
+    onDelete(transaction.id);
+    setShowConfirm(false);
+  };
 
   return (
     <li className="transaction-item">
@@ -15,12 +24,20 @@ function TransactionItem({ transaction, onDelete }) {
         </span>
         <button
           className="delete-btn"
-          onClick={() => onDelete(transaction.id)}
+          onClick={() => setShowConfirm(true)}
           aria-label="Delete transaction"
         >
           ✕
         </button>
       </div>
+
+      {showConfirm && (
+        <ConfirmModal
+          message={`Delete "${transaction.description}"? This can't be undone.`}
+          onConfirm={handleConfirmDelete}
+          onCancel={() => setShowConfirm(false)}
+        />
+      )}
     </li>
   );
 }
