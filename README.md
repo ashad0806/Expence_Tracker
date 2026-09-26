@@ -116,15 +116,15 @@ src/
 
 ## Testing Checklist
 
-- [ ] Add a transaction with a category and amount
-- [ ] Empty description or amount is rejected
-- [ ] Delete a transaction (confirmation modal appears and works)
-- [ ] Filter by category and by "All"
-- [ ] Sort by date and by amount, both directions
-- [ ] Balance, category chart, and monthly summary all update correctly
-- [ ] Set a budget and confirm the donut chart and overspend warning work
-- [ ] Toggle dark/light theme and refresh — theme choice is remembered
-- [ ] Refreshing the page keeps all transactions
+- [x] Add a transaction with a category and amount
+- [x] Empty description or amount is rejected
+- [x] Delete a transaction (confirmation modal appears and works)
+- [x] Filter by category and by "All"
+- [x] Sort by date and by amount, both directions
+- [x] Balance, category chart, and monthly summary all update correctly
+- [x] Set a budget and confirm the donut chart and overspend warning work
+- [x] Toggle dark/light theme and refresh — theme choice is remembered
+- [x] Refreshing the page keeps all transactions
 
 ## Known Limitations
 
