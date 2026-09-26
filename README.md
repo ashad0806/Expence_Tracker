@@ -2,45 +2,106 @@
 
 Wallex is a responsive React application for tracking personal income and expenses. Users can log transactions, monitor a running balance, set a monthly budget, and visualize their spending habits — all without needing a backend, since data is saved locally in the browser.
 
+**Live Demo:** https://expence-tracker-bay-pi.vercel.app/
+
+Repository: https://github.com/ashad0806/Expence_Tracker
+
 ## Features
 
-- Add transactions with description, amount, type (income/expense), and category
-- View a running balance (income − expenses) updated in real time
-- List all transactions with category and date, with a "View All / Show Less" toggle after the first 5
-- Delete individual transactions, with a custom confirmation dialog to prevent accidental deletion
-- Filter transactions by category and sort by date or amount
-- Set a monthly budget with a donut-chart progress indicator and an overspend warning banner
-- Visualize spending by category with a bar chart
-- View a monthly summary of income, expenses, and net total
-- Toggle between light and dark themes, with the choice remembered across visits
-- Data persists across page refreshes using `localStorage`
-- Two-column dashboard layout on desktop that adapts to a single stacked column (with budget/chart shown above transactions) on mobile
-- In-app navigation between Dashboard, Monthly Summary, and Add Transaction views
+### Core features
+- Add transactions with a description, amount, type (income/expense), and category.
+- Delete individual transactions.
+- Running balance (income − expenses), with income and expense totals shown separately.
+- Filter transactions by category, and sort by date or amount (ascending/descending).
+- Persistence: all transactions are stored in `localStorage` and survive a page refresh.
 
-## Technologies Used
+### Extras
+- Confirmation modal before deleting a transaction, to prevent accidents.
+- "View All / Show Less" toggle — only the 5 most relevant transactions show by default.
+- Light/dark theme toggle, with the chosen theme remembered across visits.
+- Input validation: transactions with an empty description or amount are rejected.
+- Two-column responsive layout that reflows to a single column on mobile.
 
-- [React](https://react.dev/) (functional components + hooks: `useState`, `useEffect`)
-- [Vite](https://vitejs.dev/) — build tool and dev server
-- Plain CSS (no external UI library), using CSS Grid for the responsive layout and CSS custom properties (variables) for light/dark theming
-- Inline SVG for the budget donut chart (no charting library)
-- Browser `localStorage` API for persistence
+### Stretch goals
+- [x] Spending-by-category chart
+- [x] Monthly summary view (income, expense, and net grouped by month)
+- [x] Budget limit with a donut-chart progress indicator and an overspend warning
 
-## Setup Instructions
+## Tech Stack
 
-1. Clone the repository:
+| Tool | Purpose |
+|---|---|
+| React | UI components and state |
+| Vite | Dev server and build tool |
+| Plain CSS (CSS Grid, custom properties) | Styling and light/dark theming |
+| Inline SVG | Budget donut chart |
+| localStorage | Saving transactions, budget, and theme in the browser |
+
+## Getting Started
+
+You need Node.js (version 18 or newer).
+1. Clone the repository
 
 git clone https://github.com/ashad0806/Expence_Tracker.git
+
+2. Go into the project folder
+
 cd Expence_Tracker
 
-2. Install dependencies:
+3. Install dependencies
 
 npm install
 
-3. Run the development server:
+4. Start the development server
 
 npm run dev
 
-4. Open the URL shown in your terminal (usually `http://localhost:5173`).
+
+Then open the address shown in the terminal (usually `http://localhost:5173`).
+
+### Other commands
+
+npm run build # create a production build in /dist
+npm run preview # preview the production build locally
+
+
+## Project Structure
+
+src/
+├── Components/
+│ ├── NavBar.jsx # Top navigation and theme toggle
+│ ├── Balance.jsx # Running balance summary card
+│ ├── TransactionForm.jsx # Form for adding a transaction
+│ ├── TransactionList.jsx # List of transactions, empty state, view-more toggle
+│ ├── TransactionItem.jsx # Single transaction row
+│ ├── ConfirmModal.jsx # Reusable confirmation popup
+│ ├── FilterBar.jsx # Category filter and sort controls
+│ ├── BudgetTracker.jsx # Monthly budget donut chart and warning
+│ ├── CategoryChart.jsx # Spending-by-category bar chart
+│ └── MonthlySummary.jsx # Monthly income/expense/net summary
+├── App.jsx # Main state and transaction logic
+├── App.css # All application styling, including theme variables
+└── main.jsx # App entry point
+
+
+## How It Works
+
+- State lives in `App.jsx`. It holds the transaction list, active view, filters, and theme, and passes the relevant data and handler functions down to child components as props.
+- Transactions and the theme choice are persisted with `useEffect`, which writes to `localStorage` whenever they change; both are read back on load using a `useState` initializer function.
+- Each transaction is stored as an object:
+
+```js
+  {
+    id: 1790000000000,
+    description: "Groceries",
+    amount: -50,
+    category: "Personal",
+    date: "2026-09-05"
+  }
+```
+
+  Income is stored as a positive `amount`, expenses as negative — this single sign convention is what lets the balance, chart, and budget components all do simple arithmetic.
+- Filtering and sorting are derived, not stored. The visible transaction list is recalculated from the full list and the current filter/sort settings on every render, so the balance and charts always stay accurate regardless of what's currently filtered.
 
 ## Screenshots
 
@@ -53,6 +114,18 @@ npm run dev
 ### Add Transaction
 ![Add transaction form](./src/assets/Add_Transaction.png)
 
+## Testing Checklist
+
+- [ ] Add a transaction with a category and amount
+- [ ] Empty description or amount is rejected
+- [ ] Delete a transaction (confirmation modal appears and works)
+- [ ] Filter by category and by "All"
+- [ ] Sort by date and by amount, both directions
+- [ ] Balance, category chart, and monthly summary all update correctly
+- [ ] Set a budget and confirm the donut chart and overspend warning work
+- [ ] Toggle dark/light theme and refresh — theme choice is remembered
+- [ ] Refreshing the page keeps all transactions
+
 ## Known Limitations
 
 - Data is stored per-browser via `localStorage`, not synced across devices or accounts.
@@ -62,3 +135,8 @@ npm run dev
 ## License
 
 This project is licensed under the MIT License — see the [LICENSE](./LICENSE) file for details.
+
+## Author
+
+Ashad Alam
+GitHub: [@ashad0806](https://github.com/ashad0806)
